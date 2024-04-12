@@ -6,6 +6,9 @@ import PostRepository from '../../../src/Post/repositories/PostRepository'
 import PostDoesNotExistException from "../../../src/Post/exceptions/PostDoesNotExistException";
 import { randomUUID } from "crypto";
 import Pagination from "../../../src/shared/classes/Pagination";
+import Consts from "../../../src/shared/classes/consts";
+import PostExceedsLimitOfContentLength from "../../../src/Post/exceptions/PostExceedsLimitOfContentLength";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 jest.mock('../../../src/context/databaseContext/index', () => ({
     __esModule: true,
@@ -15,10 +18,15 @@ jest.mock('../../../src/context/databaseContext/index', () => ({
             findUnique: jest.fn(),
             update: jest.fn(),
             delete: jest.fn(),
-            findMany: jest.fn()
+            findMany: jest.fn(),
+            count: jest.fn()
         },
     },
 }));
+
+afterEach(()=>{
+    jest.clearAllMocks();
+})
 
 describe("#PostRepository", ()=>{
     describe("Create", () =>{
@@ -56,6 +64,35 @@ describe("#PostRepository", ()=>{
             }
             
         });
+
+        it(`Should fail to create a new post with content length greater than ${Consts.POST_CONTENT_MAX_LENGTH}`, async()=>{
+            
+            //Arrange
+            
+            //Generating content with max length + 1
+            let content = "";
+            for(let i = 0; i < Consts.POST_CONTENT_MAX_LENGTH+1; i++){
+                content += "A";
+            }
+
+            const post ={
+                id: randomUUID(),
+                authorId: randomUUID(),
+                content: content
+            } as Partial<Post>;
+            const postRepository = new PostRepository();
+
+
+            try{
+                //Act
+                const createdPost = await postRepository.create(post);
+                fail("Should've thrown PostExceedsLimitOfContentLength")
+                
+            }catch(e){
+                //Assert
+                expect(e).toBeInstanceOf(PostExceedsLimitOfContentLength);
+            }
+        })
     });
 
     describe("Update", () =>{
@@ -76,7 +113,7 @@ describe("#PostRepository", ()=>{
             (databaseContext.post.update as jest.Mock).mockResolvedValue(expectedUpdatedPost);
 
             //Act
-            const updatedPost = await postRepository.update(newContent, post.id);
+            const updatedPost = await postRepository.update(newContent, post.id, post.authorId);
 
             //Assert
             expect(updatedPost).toEqual(expectedUpdatedPost);
@@ -87,11 +124,16 @@ describe("#PostRepository", ()=>{
             expect(updatedPost.id).toEqual(post.id);
         });
 
-        it("Should fail to update unexistent Post and throw PostDoesNotExistsException", async()=>{
+        it(`Should fail to update to more than ${Consts.POST_CONTENT_MAX_LENGTH} characters and throw PostExceedsLimitOfContentLength`, async()=>{
             //Arrange
             const post = new PostModelFactory().build();
             const postRepository = new PostRepository();
-            const newContent = "This is a test where we have less than 280 chars.";
+            let newContent = "";
+
+            for(let i = 0; i < Consts.POST_CONTENT_MAX_LENGTH + 1; i++){
+                newContent += "A";
+            }
+
             const expectedUpdatedPost = new PostModelFactory()
                 .withAuthorId(post.authorId)
                 .withId(post.id)
@@ -99,39 +141,13 @@ describe("#PostRepository", ()=>{
                 .withUpdatedAt(new Date())
                 .build();
 
-            (databaseContext.post.findUnique as jest.Mock).mockResolvedValue(null);
-            (databaseContext.post.update as jest.Mock).mockResolvedValue(expectedUpdatedPost);
-
             try{
-                const updatedPost = await postRepository.update(newContent, post.id);
-                fail("Should've thrown PostDoesNotExistException")
+                const updatedPost = await postRepository.update(newContent, post.id, post.authorId);
+                fail("Should've thrown PostExceedsContentLengthLimit");
             }catch(e){
-                expect(e).toBeInstanceOf(PostDoesNotExistException);
+                expect(e).toBeInstanceOf(PostExceedsLimitOfContentLength);
             }
-        });
-
-        // it("Should fail to update to more than 280 characters", async()=>{
-        //     //Arrange
-        //     const post = new PostModelFactory().build();
-        //     const postRepository = new PostRepository();
-        //     const newContent = "This is a test where we have more than 280 chars. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in lacus vulputate, suscipit sapien quis, dignissim neque. Sed vel euismod lacus, ut sagittis quam. Sed et ante justo. Ut sollicitudin non arcu ut pharetra. Nullam varius ligula enim, id tincidunt justo rutrum p";
-        //     const expectedUpdatedPost = new PostModelFactory()
-        //         .withAuthorId(post.authorId)
-        //         .withId(post.id)
-        //         .withContent(newContent)
-        //         .withUpdatedAt(new Date())
-        //         .build();
-
-        //     (databaseContext.post.findUnique as jest.Mock).mockResolvedValue(post);
-        //     (databaseContext.post.update as jest.Mock).mockResolvedValue(expectedUpdatedPost);
-
-        //     try{
-        //         const updatedPost = await postRepository.update(newContent, post.id);
-        //         fail("Should've thrown PostDoesNotExistException");
-        //     }catch(e){
-        //         expect(e).toBeInstanceOf(PostDoesNotExistException);
-        //     }
-        // })
+        })
     });
 
     describe("Delete",() =>{
@@ -145,7 +161,7 @@ describe("#PostRepository", ()=>{
             (databaseContext.post.delete as jest.Mock).mockResolvedValue(post);
 
             //Act
-            const deletedPost = await postRepository.delete(post.id);
+            const deletedPost = await postRepository.delete(post.id, randomUUID());
 
             //Assert
             expect(deletedPost).toEqual(post);
@@ -158,16 +174,16 @@ describe("#PostRepository", ()=>{
             const randomId = randomUUID();
             const postRepository = new PostRepository();
 
-            (databaseContext.post.findUnique as jest.Mock).mockResolvedValue(null);
+            (databaseContext.post.delete as jest.Mock).mockRejectedValue(new PrismaClientKnownRequestError("",{code:"",clientVersion:"meta"}));
             
             try{
                 //Act
-                const deletedPost = await postRepository.delete(randomId);
+                const deletedPost = await postRepository.delete(randomId, randomUUID());
                 fail("Should've thrown PostDoesNotExistException");
 
             }catch(e){
                 //Assert
-                expect(e).toBeInstanceOf(PostDoesNotExistException);
+                expect(e).toBeInstanceOf(PrismaClientKnownRequestError);
             }
             
         });
@@ -181,6 +197,7 @@ describe("#PostRepository", ()=>{
             const mockPosts = Array.from({ length: pageSize }, (_, index) => (new PostModelFactory().build()));
             const paginatedPosts = new Pagination<Post>({
                 page:1,
+                totalPages:1,
                 offset:0,
                 pageSize:10,
                 data:mockPosts
@@ -188,6 +205,7 @@ describe("#PostRepository", ()=>{
             const postRepository = new PostRepository();
 
             (databaseContext.post.findMany as jest.Mock).mockResolvedValue(mockPosts);
+            (databaseContext.post.count as jest.Mock).mockResolvedValue(10);
             const page = 1;
 
             //Act
@@ -201,7 +219,7 @@ describe("#PostRepository", ()=>{
                 skip: 0,
                 take: pageSize,
                 orderBy: { createdAt: 'desc' },
-                include:{author:true}
+                include:{author:{select:{id:true,name:true}}}
             });
         });
     })

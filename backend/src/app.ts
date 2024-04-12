@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import router from './routes/index'
 
 class App{
     public express: express.Application;
@@ -18,7 +19,7 @@ class App{
             return res.status(200).json({message: 'Server is running on port 8080'});
         });
 
-        //this.express.use(router())
+        this.express.use(router());
     }
 }
 

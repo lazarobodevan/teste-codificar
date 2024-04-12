@@ -3,11 +3,17 @@ import IPostRepository from "./IPostRepository";
 import connection from '../../context/databaseContext/index'
 import PostDoesNotExistException from "../exceptions/PostDoesNotExistException";
 import Pagination from "../../shared/classes/Pagination";
+import PostExceedsLimitOfContentLength from "../exceptions/PostExceedsLimitOfContentLength";
+import Consts from "../../shared/classes/consts";
 
 class PostRepository implements IPostRepository{
     
     async create(post:Partial<Post>):Promise<Post>{
         try{
+            if(post.content!.length > Consts.POST_CONTENT_MAX_LENGTH){
+                throw new PostExceedsLimitOfContentLength();
+            }
+
             const createdPost = await connection.post.create(
                 {data:{
                     authorId: post.authorId!,
@@ -20,13 +26,12 @@ class PostRepository implements IPostRepository{
         }
     }
     
-    async update(content:string, id:string):Promise<Post>{
+    async update(content:string, id:string, authorId:string):Promise<Post>{
         try{
-            const isPostExist = await connection.post.findUnique({where:{id:id}});
-            if(!isPostExist){
-                throw new PostDoesNotExistException();
+            if(content.length > Consts.POST_CONTENT_MAX_LENGTH){
+                throw new PostExceedsLimitOfContentLength();
             }
-            const updatedPost = await connection.post.update({data:{content:content},where:{id:id}});
+            const updatedPost = await connection.post.update({data:{content:content},where:{id:id,authorId:authorId}});
 
             return updatedPost;
         }catch(e){
@@ -34,14 +39,9 @@ class PostRepository implements IPostRepository{
         }
     }
     
-    async delete(id:string):Promise<Post>{
+    async delete(id:string, authorId:string):Promise<Post>{
         try{
-            const isPostExist = await connection.post.findUnique({where:{id:id}});
-            if(!isPostExist){
-                throw new PostDoesNotExistException();
-            }
-
-            const deletedPost = await connection.post.delete({where:{id:id}});
+            const deletedPost = await connection.post.delete({where:{id:id,authorId:authorId}});
             return deletedPost;
         }catch(e){
             throw e;
@@ -50,20 +50,40 @@ class PostRepository implements IPostRepository{
 
     async list(page:number, pageSize:number):Promise<Pagination<Post>>{
         try{
-            const offset = (page - 1) * pageSize;
+            const totalPostsCount = await connection.post.count();
+            const pageCount = Math.ceil(totalPostsCount / pageSize);
+            page = Math.min(page, Math.floor(pageCount) - 1);
+
+            const offset = Math.max(0, page) * pageSize;
             const posts = await connection.post.findMany({
                 skip: offset,
                 take: pageSize,
                 orderBy: { createdAt: 'desc' },
-                include:{author:true}
+                include:{author:{
+                    select:{
+                        id:true,
+                        name:true
+                    }
+                }}
             });
 
             return new Pagination<Post>({
                 page: page,
+                totalPages: pageCount,
                 pageSize:pageSize,
                 offset:offset,
                 data:posts
             });
+        }catch(e){
+            throw e;
+        }
+    }
+
+    async findById(id:string):Promise<Post | null>{
+        try{
+            const foundPost = await connection.post.findUnique({where:{id:id}});
+
+            return foundPost;
         }catch(e){
             throw e;
         }

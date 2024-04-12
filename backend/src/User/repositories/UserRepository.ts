@@ -2,6 +2,7 @@ import { Prisma, User } from "@prisma/client";
 import IUserRepository from "./IUserRepository";
 import connection from '../../context/databaseContext/index'
 import UserAlreadyExsitsException from "../exceptions/UserAlreadyExistsException";
+import bcrypt from 'bcrypt';
 
 class UserRepository implements IUserRepository{
     
@@ -10,7 +11,9 @@ class UserRepository implements IUserRepository{
     async create(user: Partial<User>): Promise<User> {
         try{
 
-            let newUser = await connection.user.create({data:{name:user.name!, email: user.email!, password: user.password!}});
+            let hashedPassword = await bcrypt.hash(user.password!,10);
+
+            let newUser = await connection.user.create({data:{name:user.name!, email: user.email!, password: hashedPassword}});
             return newUser;
 
         }catch(e){
@@ -32,8 +35,13 @@ class UserRepository implements IUserRepository{
         }
     }
 
-    findById(id: string): Promise<User | null> {
-        throw new Error("Method not implemented.");
+    async findById(id: string): Promise<User | null> {
+        try{
+            let possibleUser = await connection.user.findUnique({where:{id:id}});
+            return possibleUser;
+        }catch(e){
+            throw e;
+        }
     }
 
 }
