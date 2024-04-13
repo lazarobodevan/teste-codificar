@@ -107,7 +107,7 @@ class PostController{
     listPosts = async(req:Request, res:Response)=>{
         try{
             const page = req.query.page ? parseInt(req.query.page as string, 10) : 0;
-            const pageSize = 5;
+            const pageSize = 8;
 
             const posts = await this.listPostsUseCase.execute(page, pageSize);
 
