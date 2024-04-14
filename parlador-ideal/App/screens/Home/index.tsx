@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, RefreshControl } from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthContext';
@@ -15,7 +15,9 @@ export default function Home() {
   const {authState, onLogout} = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [page, setPage] = useState(0);
+  const [displayPage, setDisplayPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const userName = authState.user.name.length > 8 ? 
     authState.user.name.split(" ")[0].substring(0,8) +"...": 
@@ -25,17 +27,34 @@ export default function Home() {
 
   const getPosts = async() =>{
     try{
-
       const loadedPosts = await PostService.getPosts(page, totalPages);
       if(!loadedPosts?.data) return;
 
       setPosts([...posts, ...loadedPosts.data]);
       setPage(page+1)
+      setDisplayPage(page+1)
       setTotalPages(loadedPosts.totalPages);
     }catch(e:any){
       console.log(e);
     }
   }
+
+  const handleDelete = (postId: string) =>{
+    setPosts(posts.filter(post => post.id != postId));
+  }
+
+  const refresh = async()=>{
+    try{
+      const loadedPosts = await PostService.getPosts(0);
+      setPosts(loadedPosts.data);
+      setPage(1);
+      setDisplayPage(1);
+      setTotalPages(loadedPosts.totalPages);
+    }catch(e){
+      console.log(e);
+    }
+  }
+
 
   useEffect(()=>{
     
@@ -61,22 +80,21 @@ export default function Home() {
         <View style={styles.posts_header}>
           <Text style={styles.post_title}>Posts recentes</Text>
           <Text style={{fontFamily:theme.fonts.poppins_regular}}>
-            Página {page}/{totalPages}
+            Página {displayPage}/{totalPages}
           </Text>
         </View>
         <FlatList
           style={{marginTop:20}}
           data={posts}
           renderItem={({item})=><PostComponent 
-            id={item.id}
-            content={item.content}
-            author={item.author!}
-            createdAt={item.createdAt}
-            key={item.id}/>}
+            post={item}
+            onDelete={handleDelete}/>}
             ItemSeparatorComponent={()=><View style={{height:30}}/>}
           keyExtractor={item => String(item.id)}
           onEndReached={getPosts}
           onEndReachedThreshold={.1}
+          ListEmptyComponent={()=> <Text>Nenhum post por aqui...</Text>}
+          refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh}/>}
         />
       </View>
 

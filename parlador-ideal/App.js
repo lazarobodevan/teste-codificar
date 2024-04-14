@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './App/screens/Home';
 import NewPost from './App/screens/NewPost';
+import Toast from 'react-native-toast-message';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <AuthProvider>
       <Layout></Layout>
+      <Toast/>
     </AuthProvider>
     
   );
