@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import IPostRepository from "../Post/repositories/IPostRepository";
 import CreatePostUseCase from "../Post/useCases/CreatePostUseCase";
 import IUserRepository from "../User/repositories/IUserRepository";
-import CreatePostDTO from "../Post/DTOs/createPostDTO";
+import CreatePostDTO from "../Post/DTOs/CreatePostDTO";
 import UserDoesNotExistException from "../User/exceptions/UserDoesNotExistException";
 import PostExceedsLimitOfContentLength from "../Post/exceptions/PostExceedsLimitOfContentLength";
 import UpdatePostUseCase from "../Post/useCases/UpdatePostUseCase";
@@ -43,9 +43,9 @@ class PostController{
                 content: content
             } as CreatePostDTO;
 
+            cliLogger.info("Create post was called");
             const createdPost = await this.createPostUseCase.execute(createPostDTO);
             
-            cliLogger.info("Create post was called");
             return res.status(201).json(createdPost);
 
         }catch(e:any){
@@ -74,9 +74,9 @@ class PostController{
                 postId: id
             } as UpdatePostDTO;
 
+            cliLogger.info("Update post was called");
             const updatedPost = await this.updatePostUseCase.execute(updateDTO);
 
-            cliLogger.info("Update post was called");
 
             return res.status(200).json(updatedPost);
 
@@ -99,9 +99,9 @@ class PostController{
             const {id} = req.params;
             const user = req.user;
 
+            cliLogger.info("Delete post was called");
             const deletedPost = await this.deletePostUseCase.execute(id, user.id!);
 
-            cliLogger.info("Delete post was called");
             return res.status(200).json(deletedPost);
 
         }catch(e:any){
@@ -123,9 +123,9 @@ class PostController{
             const page = req.query.page ? parseInt(req.query.page as string, 10) : 0;
             const pageSize = 8;
 
+            cliLogger.info("List posts was called");
             const posts = await this.listPostsUseCase.execute(page, pageSize);
 
-            cliLogger.info("List posts was called");
             return res.status(200).json(posts);
         }catch(e:any){
             applicationLogger.error("Failed to list posts", e);

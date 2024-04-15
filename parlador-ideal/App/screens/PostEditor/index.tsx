@@ -12,7 +12,7 @@ import PostService from '../../services/post/PostService'
 import Toast from 'react-native-toast-message'
 import ToastHelper from '../../helpers/ToastHelper'
 
-export default function NewPost() {
+export default function PostEditor() {
 
   const [content,setContent] = useState("");
   const [postId, setPostId] = useState(null);

@@ -6,6 +6,7 @@ import UserAlreadyExsitsException from "../User/exceptions/UserAlreadyExistsExce
 import LoginUseCase from "../User/useCases/LoginUseCase";
 import InvalidCredentialsException from "../shared/exceptions/InvalidCredentialsException";
 import { applicationLogger, cliLogger } from "../utils/Logger";
+import UserDoesNotExistException from "../User/exceptions/UserDoesNotExistException";
 
 class UserController{
 
@@ -25,18 +26,17 @@ class UserController{
         try{
             const createUserDTO = req.createUserDTO;
             
-
+            cliLogger.info("Create user called");
             const createdUser = await this.createUserUseCase.execute(createUserDTO!);
 
-            cliLogger.info("Create user called");
             return res.status(201).json(createdUser);
 
         }catch(e){
-            cliLogger.error("Failed to create user");
-            applicationLogger.error("Failed to create user",e);
             if(e instanceof UserAlreadyExsitsException){
                 return res.status(400).json({error: e.message});
             }
+            cliLogger.error("Failed to create user");
+            applicationLogger.error("Failed to create user",e);
             return res.status(500).json({error:e})
         }
     }
@@ -45,18 +45,20 @@ class UserController{
         try{
             const {email, password} = req.body;
             
-            const loggedUser = await this.loginUseCase.execute(email, password);
-
             cliLogger.info("Login called");
+            const loggedUser = await this.loginUseCase.execute(email, password);
             return res.status(200).json(loggedUser);
 
         }catch(e:any){
+
+            if(e instanceof InvalidCredentialsException){
+                return res.status(403).json({error:e.message});
+            }
+            if(e instanceof UserDoesNotExistException){
+                return res.status(403).json({error:e.message});
+            }
             cliLogger.error("Failed to login");
             applicationLogger.error("Failed to login", e);
-            if(e instanceof InvalidCredentialsException){
-                return res.status(400).json({error:e.message});
-            }
-
             return res.status(500).json({error:e.message})
         }
         

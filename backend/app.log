@@ -48,3 +48,172 @@
     '    at runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n' +
     '    at Object.worker (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)'
 }
+{
+  level: 'error',
+  message: 'Failed to create user',
+  stack: 'Error: \n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:54:74\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at Object.<anonymous>.__awaiter (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:4:12)\n' +
+    '    at Object.<anonymous> (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:50:47)\n' +
+    '    at Promise.then.completed (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at callAsyncCircusFn (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n' +
+    '    at _callCircusTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n' +
+    '    at _runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at run (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n' +
+    '    at runAndTransformResultsToJestFormat (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n' +
+    '    at jestAdapter (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n' +
+    '    at runTestInternal (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n' +
+    '    at runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n' +
+    '    at Object.worker (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)'
+}
+{
+  level: 'error',
+  message: 'Failed to find user by email',
+  stack: 'Error: \n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:99:78\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at Object.<anonymous>.__awaiter (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:4:12)\n' +
+    '    at Object.<anonymous> (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:96:65)\n' +
+    '    at Promise.then.completed (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at callAsyncCircusFn (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n' +
+    '    at _callCircusTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n' +
+    '    at _runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at run (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n' +
+    '    at runAndTransformResultsToJestFormat (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n' +
+    '    at jestAdapter (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n' +
+    '    at runTestInternal (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n' +
+    '    at runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n' +
+    '    at Object.worker (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)'
+}
+{
+  level: 'error',
+  message: 'Failed to create user',
+  stack: 'Error: \n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:54:74\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at Object.<anonymous>.__awaiter (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:4:12)\n' +
+    '    at Object.<anonymous> (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:50:47)\n' +
+    '    at Promise.then.completed (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at callAsyncCircusFn (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n' +
+    '    at _callCircusTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n' +
+    '    at _runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at run (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n' +
+    '    at runAndTransformResultsToJestFormat (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n' +
+    '    at jestAdapter (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n' +
+    '    at runTestInternal (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n' +
+    '    at runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n' +
+    '    at Object.worker (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)'
+}
+{
+  level: 'error',
+  message: 'Failed to find user by email',
+  stack: 'Error: \n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:99:78\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at Object.<anonymous>.__awaiter (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:4:12)\n' +
+    '    at Object.<anonymous> (C:\\projs\\teste-codificar\\backend\\__test__\\User\\repositories\\UserRepositoyTest.spec.ts:96:65)\n' +
+    '    at Promise.then.completed (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at callAsyncCircusFn (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n' +
+    '    at _callCircusTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n' +
+    '    at _runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at _runTestsForDescribeBlock (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n' +
+    '    at run (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n' +
+    '    at runAndTransformResultsToJestFormat (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n' +
+    '    at jestAdapter (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n' +
+    '    at runTestInternal (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n' +
+    '    at runTest (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n' +
+    '    at Object.worker (C:\\projs\\teste-codificar\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)'
+}
+{
+  name: 'UserDoesNotExistException',
+  level: 'error',
+  message: 'Failed to login Usuário não existe',
+  stack: 'UserDoesNotExistException: Usuário não existe\n' +
+    '    at LoginUseCase.<anonymous> (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:22:23)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:5:58)'
+}
+{
+  name: 'UserDoesNotExistException',
+  level: 'error',
+  message: 'Failed to login Usuário não existe',
+  stack: 'UserDoesNotExistException: Usuário não existe\n' +
+    '    at LoginUseCase.<anonymous> (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:22:23)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:5:58)',
+  timestamp: '2024-04-15T19:23:40.721Z'
+}
+{
+  name: 'UserDoesNotExistException',
+  level: 'error',
+  message: 'Failed to login Usuário não existe',
+  stack: 'UserDoesNotExistException: Usuário não existe\n' +
+    '    at LoginUseCase.<anonymous> (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:22:23)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:5:58)',
+  timestamp: '2024-04-15T19:27:59.449Z'
+}
+{
+  name: 'UserDoesNotExistException',
+  level: 'error',
+  message: 'Failed to login Usuário não existe',
+  stack: 'UserDoesNotExistException: Usuário não existe\n' +
+    '    at LoginUseCase.<anonymous> (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:22:23)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:5:58)',
+  timestamp: '2024-04-15T19:29:11.280Z'
+}
+{
+  name: 'UserDoesNotExistException',
+  level: 'error',
+  message: 'Failed to login Usuário não existe',
+  stack: 'UserDoesNotExistException: Usuário não existe\n' +
+    '    at LoginUseCase.<anonymous> (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:22:23)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:5:58)',
+  timestamp: '2024-04-15T19:29:27.560Z'
+}
+{
+  name: 'UserDoesNotExistException',
+  level: 'error',
+  message: 'Failed to login Usuário não existe',
+  stack: 'UserDoesNotExistException: Usuário não existe\n' +
+    '    at LoginUseCase.<anonymous> (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:22:23)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:5:58)',
+  timestamp: '2024-04-15T19:53:08.229Z'
+}
+{
+  name: 'UserDoesNotExistException',
+  level: 'error',
+  message: 'Failed to login Usuário não existe',
+  stack: 'UserDoesNotExistException: Usuário não existe\n' +
+    '    at LoginUseCase.<anonymous> (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:22:23)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (C:\\projs\\teste-codificar\\backend\\src\\User\\useCases\\LoginUseCase.ts:5:58)',
+  timestamp: '2024-04-15T19:53:14.226Z'
+}

@@ -28,11 +28,18 @@ class UserMiddleware{
 
     validateLoginBody(req:Request, res:Response, next: NextFunction){
         const {email, password} = req.body;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if(!email)
             return res.status(400).json({error:"Campo email é obrigatório"})
 
+        if(!emailRegex.test(email)){
+            return res.status(400).json({error: "Email em formato inválido"})
+        }
+
         if(!password)
             return res.status(400).json({error:"Campo senha é obrigatório"})
+        
 
         next();
     }

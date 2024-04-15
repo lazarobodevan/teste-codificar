@@ -2,11 +2,26 @@ import winston from "winston";
 
 const { timestamp, json, prettyPrint, errors, combine, cli } = winston.format;
 
+const brazilTimezoneOffset = -3 * 60; // GMT-3
+
+const formatBrazilTimestamp = () => {
+    const now = new Date();
+    const offsetMs = now.getTimezoneOffset() * 60 * 1000 - brazilTimezoneOffset * 60 * 1000;
+    const newDate = new Date(now.getTime() - offsetMs);
+    return newDate.toISOString();
+};
+
 export const cliLogger = winston.createLogger({
     level:"info",
     format: combine(
-        cli(),
-        timestamp(),
+        winston.format((info) => {
+            info.timestamp = formatBrazilTimestamp();
+            return info;
+        })(),
+        winston.format.printf(({ level, message, timestamp }) => {
+            return `${formatBrazilTimestamp()} ${level}: ${message}`;
+        }),
+        
         errors({stack:true})
     ),
     transports:[
@@ -19,8 +34,8 @@ export const applicationLogger = winston.createLogger({
     level:"info",
     format: combine(
         json(),
-        prettyPrint(),
         timestamp(),
+        prettyPrint(),
         errors({stack:true})
     ),
     transports:[

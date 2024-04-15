@@ -8,8 +8,8 @@ import { AuthProvider, useAuth } from './App/context/AuthContext';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './App/screens/Home';
-import NewPost from './App/screens/NewPost';
 import Toast from 'react-native-toast-message';
+import PostEditor from './App/screens/PostEditor';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -43,7 +43,7 @@ export const Layout = () =>{
               component={Home}>
             </Stack.Screen>:
             <Stack.Screen name='Login' component={Login} ></Stack.Screen>}
-            <Stack.Screen name='NewPost' component={NewPost}></Stack.Screen>
+            <Stack.Screen name='PostEditor' component={PostEditor}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
   );

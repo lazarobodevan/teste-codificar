@@ -5,7 +5,7 @@ import IUserRepository from "../../User/repositories/IUserRepository";
 import PostExceedsLimitOfContentLength from "../exceptions/PostExceedsLimitOfContentLength";
 import UserDoesNotExistException from "../../User/exceptions/UserDoesNotExistException";
 import Consts from "../../shared/classes/consts";
-import CreatePostDTO from "../DTOs/createPostDTO";
+import CreatePostDTO from "../DTOs/CreatePostDTO";
 
 
 class CreatePostUseCase{
