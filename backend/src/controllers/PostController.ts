@@ -11,6 +11,7 @@ import UnauthorizedException from "../shared/exceptions/UnauthorizedException";
 import PostDoesNotExistException from "../Post/exceptions/PostDoesNotExistException";
 import DeletePostUseCase from "../Post/useCases/DeletePostUseCase";
 import ListPostsUseCase from "../Post/useCases/ListPostsUseCase";
+import { applicationLogger, cliLogger } from "../utils/Logger";
 
 class PostController{
     private readonly postRepository:IPostRepository;
@@ -43,10 +44,14 @@ class PostController{
             } as CreatePostDTO;
 
             const createdPost = await this.createPostUseCase.execute(createPostDTO);
-
+            
+            cliLogger.info("Create post was called");
             return res.status(201).json(createdPost);
 
         }catch(e:any){
+            applicationLogger.error("Failed to create post", e);
+            cliLogger.error("Failed to create post",e);
+            
             if(e instanceof UserDoesNotExistException){
                 return res.status(400).json({error: e.message});
             }
@@ -71,9 +76,14 @@ class PostController{
 
             const updatedPost = await this.updatePostUseCase.execute(updateDTO);
 
+            cliLogger.info("Update post was called");
+
             return res.status(200).json(updatedPost);
 
         }catch(e:any){
+            applicationLogger.error("Failed to update post", e);
+            cliLogger.error("Failed to update post",e);
+            
             if(e instanceof UnauthorizedException){
                 return res.status(400).json({error:e.message});
             }
@@ -91,9 +101,13 @@ class PostController{
 
             const deletedPost = await this.deletePostUseCase.execute(id, user.id!);
 
+            cliLogger.info("Delete post was called");
             return res.status(200).json(deletedPost);
 
         }catch(e:any){
+            applicationLogger.error("Failed to delete post", e);
+            cliLogger.error("Failed to delete post",e);
+            
             if(e instanceof PostDoesNotExistException){
                 return res.status(400).json({error:e.message});
             }
@@ -111,8 +125,12 @@ class PostController{
 
             const posts = await this.listPostsUseCase.execute(page, pageSize);
 
+            cliLogger.info("List posts was called");
             return res.status(200).json(posts);
         }catch(e:any){
+            applicationLogger.error("Failed to list posts", e);
+            cliLogger.error("Failed to list post",e);
+            
             return res.status(500).json({error:e.message})
         }
     }

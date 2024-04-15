@@ -1,6 +1,7 @@
 import app from './app';
+import { cliLogger} from './utils/Logger';
 require('dotenv').config();
 
 const PORT = 8080;
 app.listen(PORT);
-console.log(`Running in port ${PORT}`);
+cliLogger.info(`Running in port ${PORT}`);

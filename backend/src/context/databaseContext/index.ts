@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { cliLogger, applicationLogger } from "../../utils/Logger";
 
 class DatabaseContext{
     public connection!: PrismaClient;
@@ -6,8 +7,10 @@ class DatabaseContext{
     constructor(){
         try{
             this.connection = new PrismaClient();
+            cliLogger.info("Connected to database");
         }catch(e){
-            console.log(e)
+            cliLogger.error("Failed to connect to the database", e);
+            applicationLogger.error("Failed to connect to the database", e);
         }
     }
 }
