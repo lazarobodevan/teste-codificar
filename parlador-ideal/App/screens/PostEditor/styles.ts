@@ -7,17 +7,6 @@ export const styles = StyleSheet.create({
         padding:20
     },
 
-    header:{
-        flexDirection:"row",
-        alignItems:'center',
-        marginBottom:20,
-        gap:10
-    },
-
-    header_text:{
-        fontFamily: theme.fonts.poppins_bold,
-        fontSize:18
-    },
 
     counter_container:{
         flexDirection:"row",

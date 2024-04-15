@@ -6,6 +6,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import { useAuth } from '../../context/AuthContext'
 import ToastHelper from '../../helpers/ToastHelper'
+import { Link } from '@react-navigation/native'
 
 export default function Login() {
 
@@ -45,6 +46,12 @@ export default function Login() {
           style={{marginTop:20}} 
           onPressed={()=>handleLogin()}
           isLoading={isLoading}/>
+        <Text style={styles.register}>
+          Ainda não tem uma conta?{"\n"}
+          <Link to={"/Register"} style={[styles.register, {color:"blue"}]}>
+            Cadastre-se!
+          </Link>
+        </Text>
       </View>
     </View>
   )

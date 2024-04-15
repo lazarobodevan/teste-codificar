@@ -32,7 +32,7 @@ export default function PostComponent({post, onDelete}:Props) {
     post.author.name;
 
     const handleOnUpdate = () =>{
-        navigator.navigate("NewPost",{content:post.content, id:post.id})
+        navigator.navigate("PostEditor",{content:post.content, id:post.id})
     }
 
     const handleDelete = async () =>{

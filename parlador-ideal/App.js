@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './App/screens/Home';
 import Toast from 'react-native-toast-message';
 import PostEditor from './App/screens/PostEditor';
+import Register from './App/screens/Register';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -44,6 +45,7 @@ export const Layout = () =>{
             </Stack.Screen>:
             <Stack.Screen name='Login' component={Login} ></Stack.Screen>}
             <Stack.Screen name='PostEditor' component={PostEditor}></Stack.Screen>
+            <Stack.Screen name='Register' component={Register}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
   );

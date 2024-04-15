@@ -70,7 +70,7 @@ export default function Home() {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity onPress={()=>{navigation.navigate("NewPost" as never)}}>
+      <TouchableOpacity onPress={()=>{navigation.navigate("PostEditor" as never)}}>
         <View style={styles.new_post}>
           <Text style={styles.new_post_text}>Criar novo post...</Text>
         </View>

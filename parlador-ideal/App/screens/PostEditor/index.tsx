@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StatusBar } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from './styles'
@@ -11,6 +11,7 @@ import { useNavigation, CommonActions, useRoute } from '@react-navigation/native
 import PostService from '../../services/post/PostService'
 import Toast from 'react-native-toast-message'
 import ToastHelper from '../../helpers/ToastHelper'
+import Header from '../../components/Header'
 
 export default function PostEditor() {
 
@@ -69,13 +70,12 @@ export default function PostEditor() {
   },[])
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.header}>
-        <TouchableOpacity onPress={()=>{navigation.goBack()}}>
-          <Ionicons name='arrow-back-circle-outline' style={{fontSize:40, color:theme.colors.primary3}}/>
-        </TouchableOpacity>
-        <Text style={styles.header_text}>Criar novo post</Text>
+    <View>
+      <SafeAreaView>
+        <Header text='Criar novo post'/>
       </SafeAreaView>
+      <View style={styles.container}>
+      <View style={{marginTop:StatusBar.currentHeight+20}}>
         <Input onChanged={(text)=>{setContent(text)}} 
           placeholder='Novo post...' 
           multiline={true} 
@@ -103,6 +103,8 @@ export default function PostEditor() {
           postId &&
           <Button onPressed={async()=>{await updatePost()}} text='Atualizar' style={{marginTop:40, width:"60%", alignSelf:"flex-end"}}/>
         }
+      </View>
+    </View>
     </View>
   )
 }
