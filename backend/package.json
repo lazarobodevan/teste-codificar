@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest __test__",
     "dev": "SET NODE_ENV=DEV& nodemon src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
