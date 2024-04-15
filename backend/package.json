@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest __test__",
     "dev": "SET NODE_ENV=DEV& nodemon src/server.ts",
-    "vercel-build":"npx prisma migrate deploy"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import IPostRepository from "../Post/repositories/IPostRepository";
 import CreatePostUseCase from "../Post/useCases/CreatePostUseCase";
 import IUserRepository from "../User/repositories/IUserRepository";
-import CreatePostDTO from "../Post/DTOs/CreatePostDTO";
+import CreatePostDTO from "../Post/DTOs/createPostDTO";
 import UserDoesNotExistException from "../User/exceptions/UserDoesNotExistException";
 import PostExceedsLimitOfContentLength from "../Post/exceptions/PostExceedsLimitOfContentLength";
 import UpdatePostUseCase from "../Post/useCases/UpdatePostUseCase";
