@@ -5,12 +5,15 @@ export const styles = StyleSheet.create({
     header:{
         flexDirection:"row",
         alignItems:'center',
-        marginBottom:20,
         gap:10,
         width:"100%",
-        marginTop: StatusBar.currentHeight,
+        paddingTop: StatusBar.currentHeight+5,
         position:"absolute",
-        padding:20
+        paddingVertical:10,
+        paddingHorizontal:20,
+        backgroundColor: '#f2f2f2',
+        zIndex:9999,
+        elevation: 1
     },
 
     header_text:{

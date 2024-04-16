@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { theme } from '../../@globals/styles/theme'
 import Header from '../../components/Header'
+import { ScrollView } from 'react-native'
 
 export default function Register() {
 
@@ -80,10 +81,10 @@ export default function Register() {
 
   return (
     <View style={{flex:1}}>
-      <SafeAreaView style={{alignSelf:"flex-start"}}>
-          <Header text='Cadastre-se'/>
-      </SafeAreaView>
-      <View style={styles.container}>
+      
+      <Header text='Cadastre-se'/>
+      
+      <ScrollView contentContainerStyle={styles.container}>
         <Image source={icon} style={styles.img}/>
         <Text style={styles.title}>Parlador Ideal</Text>
 
@@ -116,7 +117,7 @@ export default function Register() {
             onPressed={()=>handleRegister()}
             isLoading={isLoading}/>
         </View>
-      </View>
+      </ScrollView>
     </View>
   )
 }

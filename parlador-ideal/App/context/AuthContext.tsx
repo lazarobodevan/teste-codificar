@@ -49,7 +49,7 @@ export const AuthProvider = ({children}:any) =>{
 
     const login = async(email:string, password:string) =>{
         try{
-            const response = await axios.post(`${Environment.getApiUrl()}/users/login`, {email, password},{timeout:5000});
+            const response = await axios.post(`${Environment.getApiUrl()}/users/login`, {email, password});
             
             setAuthState({
                 token: response.data.token,

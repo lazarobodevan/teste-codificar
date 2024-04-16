@@ -12,11 +12,11 @@ type Props = {
 export default function Header({text}:Props) {
     const navigation = useNavigation();
     return (
-        <SafeAreaView style={styles.header}>
+        <View style={styles.header}>
             <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                 <Ionicons name='arrow-back-circle-outline' style={{fontSize:40, color:theme.colors.primary3}}/>
             </TouchableOpacity>
             <Text style={styles.header_text}>{text}</Text>
-        </SafeAreaView>
+        </View>
     )
 }

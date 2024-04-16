@@ -71,9 +71,8 @@ export default function PostEditor() {
 
   return (
     <View>
-      <SafeAreaView>
+      
         <Header text='Criar novo post'/>
-      </SafeAreaView>
       <View style={styles.container}>
       <View style={{marginTop:StatusBar.currentHeight+20}}>
         <Input onChanged={(text)=>{setContent(text)}} 

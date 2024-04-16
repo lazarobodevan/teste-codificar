@@ -24,14 +24,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.lazaro.parladorideal",
+      "permissions": ["INTERNET"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font",
-      "expo-secure-store"
-    ]
+      "expo-secure-store",
+      "expo-router"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "107286bf-1f61-4315-b0eb-1f2a0d51c445"
+      }
+    }
   }
 }
