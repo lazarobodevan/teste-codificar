@@ -11,6 +11,7 @@ const formatBrazilTimestamp = () => {
     return newDate.toISOString();
 };
 
+
 export const cliLogger = winston.createLogger({
     level:"info",
     format: combine(
@@ -42,3 +43,13 @@ export const applicationLogger = winston.createLogger({
         new winston.transports.File({filename:'app.log', level:'error'}),
     ]
 })
+
+//Deactivating logs in case of auto testing
+if(process.env.NODE_ENV=="test"){
+    cliLogger.transports.forEach((transport)=>{
+        transport.silent = true;
+    })
+    applicationLogger.transports.forEach((transport)=>{
+        transport.silent = true;
+    })
+}

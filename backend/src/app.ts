@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import router from './routes/index'
+import { applicationLogger, cliLogger } from './utils/Logger';
+import { transport } from 'winston';
 
 class App{
     public express: express.Application;

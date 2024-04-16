@@ -10,16 +10,15 @@ import UserDoesNotExistException from "../User/exceptions/UserDoesNotExistExcept
 
 class UserController{
 
-    private readonly userRepository: IUserRepository;
     private readonly createUserUseCase: CreateUserUseCase;
     private readonly loginUseCase: LoginUseCase;
 
     constructor(
-        _userRepository: IUserRepository,
+        _createUserUseCase: CreateUserUseCase,
+        _loginUseCase: LoginUseCase
     ){
-        this.userRepository = _userRepository;
-        this.createUserUseCase = new CreateUserUseCase(this.userRepository);
-        this.loginUseCase = new LoginUseCase(this.userRepository);
+        this.createUserUseCase = _createUserUseCase;
+        this.loginUseCase = _loginUseCase;
     }
 
     createUser = async(req:RequestWithUserData, res:Response)=>{
@@ -31,13 +30,13 @@ class UserController{
 
             return res.status(201).json(createdUser);
 
-        }catch(e){
+        }catch(e:any){
             if(e instanceof UserAlreadyExsitsException){
                 return res.status(400).json({error: e.message});
             }
             cliLogger.error("Failed to create user");
             applicationLogger.error("Failed to create user",e);
-            return res.status(500).json({error:e})
+            return res.status(500).json({error:e.message})
         }
     }
 
