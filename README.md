@@ -4,7 +4,7 @@ Este é o desenvolvimento do desafio fullstack para a empresa Codificar Sistemas
 A descrição do produto encontra-se [aqui](https://docs.google.com/document/d/1hIvsRYuduMyvvGyBgyEyfcemGPlusZ1olOS3jRcIaJs/edit).
 
 # Atenção
-O backend está hospedado na plataforma [Render](https://render.com/), e o aplicativo já está buildado para se comunicar com este servidor. Para executar o aplicativo em dev, basta ter configurado o arquivo .env na raiz do projeto, conforme .env.example.
+O backend está hospedado na plataforma [Render](https://render.com/) - URL de produção está na documentação da API mais abaixo -, e o aplicativo já está buildado para se comunicar com este servidor - o APK está na raiz do projeto -. Para executar o aplicativo em dev, basta ter configurado o arquivo .env na raiz do projeto, conforme .env.example.
 
 
 
@@ -16,9 +16,6 @@ Instruções para reprodução do ambiente de desenvolvimento.
 
 Ao abrir a pasta backend, crie um arquivo .env na raiz do projeto e configure as variáveis de ambiente conforme .env.example.
 
-`DATABASE_URL`
-
-`JWT_PASS`
 
 A primeira é destinada a conexão com o banco de dados, e a segunda é um hash qualquer para codificação e decodificação dos tokens jwt.
 
@@ -54,10 +51,10 @@ Ao abrir a pasta parlador-ideal, execute o comando
 
     npm install
 
-Em seguida, configure as variáveis de ambiente no arquivo .env, conforme o .env.example:
-`DEV_API_BASE_URL`
-
-`PRD_API_BASE_URL`
+Em seguida, configure os ambientes:
+1- Acesse App/config/EnvironmentExample.ts;
+2- Renomeie a classe para Environment.ts;
+3- Insira as URLs de DEV e PRD.
 
 Para rodar o projeto é necessário ter instalado o aplicativo Expo para [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) e [iOS](https://apps.apple.com/br/app/expo-go/id982107779). Tendo instalado o aplicativo e logado, certifique-se de estar conectado na mesma rede que o backend. Feito isso, execute:
 
