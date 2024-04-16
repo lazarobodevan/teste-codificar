@@ -6,6 +6,7 @@ import PostExceedsLimitOfContentLength from "../exceptions/PostExceedsLimitOfCon
 import UserDoesNotExistException from "../../User/exceptions/UserDoesNotExistException";
 import Consts from "../../shared/classes/consts";
 import CreatePostDTO from "../DTOs/CreatePostDTO";
+import PostCannotBeEmptyException from "../exceptions/PostCannotBeEmptyException";
 
 
 class CreatePostUseCase{
@@ -24,6 +25,10 @@ class CreatePostUseCase{
         try{
             if(createPostDTO.content.length > Consts.POST_CONTENT_MAX_LENGTH){
                 throw new PostExceedsLimitOfContentLength();
+            }
+
+            if(createPostDTO.content.trim().length < 1){
+                throw new PostCannotBeEmptyException();
             }
 
             const isUserExists = await this.userRepository.findById(createPostDTO.authorId);

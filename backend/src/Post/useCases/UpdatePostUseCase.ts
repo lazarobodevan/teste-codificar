@@ -6,6 +6,7 @@ import PostDoesNotExistException from "../exceptions/PostDoesNotExistException";
 import PostExceedsLimitOfContentLength from "../exceptions/PostExceedsLimitOfContentLength";
 import IPostRepository from "../repositories/IPostRepository";
 import UnauthorizedException from "../../shared/exceptions/UnauthorizedException";
+import PostCannotBeEmptyException from "../exceptions/PostCannotBeEmptyException";
 
 class UpdatePostUseCase{
     private readonly postRepository:IPostRepository;
@@ -20,6 +21,10 @@ class UpdatePostUseCase{
         try{
             if(updateDTO.content.length > Consts.POST_CONTENT_MAX_LENGTH){
                 throw new PostExceedsLimitOfContentLength();
+            }
+
+            if(updateDTO.content.trim().length < 1){
+                throw new PostCannotBeEmptyException();
             }
 
             const isPostExist = await this.postRepository.findById(updateDTO.postId);

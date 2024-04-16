@@ -12,25 +12,26 @@ import PostDoesNotExistException from "../Post/exceptions/PostDoesNotExistExcept
 import DeletePostUseCase from "../Post/useCases/DeletePostUseCase";
 import ListPostsUseCase from "../Post/useCases/ListPostsUseCase";
 import { applicationLogger, cliLogger } from "../utils/Logger";
+import PostCannotBeEmptyException from "../Post/exceptions/PostCannotBeEmptyException";
 
 class PostController{
-    private readonly postRepository:IPostRepository;
-    private readonly userRepository:IUserRepository;
+
     private readonly createPostUseCase: CreatePostUseCase;
     private readonly updatePostUseCase: UpdatePostUseCase;
     private readonly deletePostUseCase: DeletePostUseCase;
     private readonly listPostsUseCase: ListPostsUseCase;
 
     constructor(
-        _postRepository:IPostRepository,
-        _userRepository:IUserRepository
+        _createPostUseCase: CreatePostUseCase,
+        _updatePostUseCase: UpdatePostUseCase,
+        _deletePostUseCase: DeletePostUseCase,
+        _listPostsUseCase: ListPostsUseCase
+
     ){
-        this.postRepository = _postRepository;
-        this.userRepository = _userRepository;
-        this.createPostUseCase = new CreatePostUseCase(this.postRepository, this.userRepository);
-        this.updatePostUseCase = new UpdatePostUseCase(this.postRepository);
-        this.deletePostUseCase = new DeletePostUseCase(this.postRepository);
-        this.listPostsUseCase = new ListPostsUseCase(this.postRepository);
+        this.createPostUseCase = _createPostUseCase;
+        this.updatePostUseCase = _updatePostUseCase;
+        this.deletePostUseCase = _deletePostUseCase;
+        this.listPostsUseCase = _listPostsUseCase;
     }
 
     createPost = async(req:Request, res:Response) =>{
@@ -56,6 +57,9 @@ class PostController{
                 return res.status(400).json({error: e.message});
             }
             if(e instanceof PostExceedsLimitOfContentLength){
+                return res.status(400).json({error: e.message});
+            }
+            if(e instanceof PostCannotBeEmptyException){
                 return res.status(400).json({error: e.message});
             }
             return res.status(500).json({error:e.message})
@@ -90,6 +94,9 @@ class PostController{
             if(e instanceof PostDoesNotExistException){
                 return res.status(400).json({error: e.message});
             }
+            if(e instanceof PostCannotBeEmptyException){
+                return res.status(400).json({error:e.message});
+            }
             return res.status(500).json({error: e.message});
         }
     }
@@ -112,7 +119,7 @@ class PostController{
                 return res.status(400).json({error:e.message});
             }
             if(e instanceof UnauthorizedException){
-                return res.status(400).json({error:e.message});
+                return res.status(403).json({error:e.message});
             }
             return res.status(500).json({error:e.message});
         }
